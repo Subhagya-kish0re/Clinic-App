@@ -25,4 +25,7 @@ public interface AppointmentService {
     List<Appointment> findByVisitorName(String visitorName);
 
     void updateAppoinmentStatus(Long appointmentId,String newStatus);
+    List<Appointment> findByAppointmentDateBetween(LocalDate startDate, LocalDate endDate);
+
+    List<Appointment>findByAppointmentDateTime(LocalDate localDate,LocalTime localTime);
 }

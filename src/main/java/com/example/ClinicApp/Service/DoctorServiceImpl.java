@@ -25,7 +25,12 @@ public class DoctorServiceImpl implements DoctorService {
         }
     }
     public Doctor findByName(String name){
-        return doctorRepository.findByName(name);
+        Optional<Doctor> optionalDoctor=doctorRepository.findByName(name);
+        if(!optionalDoctor.isPresent()){
+            return null;
+        }else {
+            return optionalDoctor.get();
+        }
     }
 
     public List<Doctor> findAll(){

@@ -65,6 +65,22 @@ public class AppointmentServiceImpl implements AppointmentService {
             throw new IllegalStateException("Appointment status is not 'PENDING', cannot be updated.");
         }
     }
+
+    @Override
+    public List<Appointment> findByAppointmentDateBetween(LocalDate startDate, LocalDate endDate) {
+        List<Appointment> appointmentList=appointmentRepository.findByAppointmentDateBetween(startDate,endDate);
+        if(appointmentList.isEmpty()){
+            return null;
+        }else{
+            return appointmentList;
+        }
+    }
+
+    @Override
+    public List<Appointment> findByAppointmentDateTime(LocalDate localDate,LocalTime localTime) {
+        return appointmentRepository.findByAppointmentDateAndAppointmentTime(localDate,localTime);
+    }
+
     private boolean isValidStatus(String status) {
         return "APPROVED".equals(status) || "CANCELLED".equals(status);
     }

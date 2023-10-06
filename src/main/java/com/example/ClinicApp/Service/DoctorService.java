@@ -16,4 +16,5 @@ public interface DoctorService {
     Doctor findByName(String doctorName);
 
     Doctor createDoctor(String doctorName);
+
 }

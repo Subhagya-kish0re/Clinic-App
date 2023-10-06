@@ -58,4 +58,11 @@ public class DoctorController {
     }
 
 
+    @GetMapping("/findbyname")
+    public ResponseEntity<Doctor>findByDoctorName(String doctorName){
+        Doctor doctor=doctorService.findByName(doctorName);
+        return ResponseEntity.ok(doctor);
+    }
+
+
 }

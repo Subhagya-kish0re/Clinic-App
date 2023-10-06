@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -104,6 +105,14 @@ public class AppointmentController {
     public ResponseEntity<String> changeStatus(@RequestParam Long appointmentId,@RequestParam String newStatus){
         appointmentService.updateAppoinmentStatus(appointmentId,newStatus);
         return ResponseEntity.ok("Appointment status updated successfully, For Appointment Id "+appointmentId+" to "+newStatus);
+    }
+
+    @GetMapping("/datesearch")
+    public ResponseEntity<List<Appointment>> searchAppointmentsByDateRange(
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate){
+        List<Appointment>appointmentList=appointmentService.findByAppointmentDateBetween(startDate,endDate);
+        return ResponseEntity.ok(appointmentList);
     }
 
 }
